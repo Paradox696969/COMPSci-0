@@ -4,7 +4,6 @@ pandas.set_option('display.max_columns', None)
 df = pandas.read_csv("Crime_data.csv")
 
 df.drop([
-        "DR_NO",
         "AREA",
         "Rpt Dist No", 
         "Part 1-2", 
@@ -26,4 +25,28 @@ df.drop([
         axis=1, inplace=True)
 
 
-print(df)
+
+### Date stuff
+df["DATE OCC"] = pandas.to_datetime(df["DATE OCC"])
+
+datesList = list(df["DATE OCC"])
+numCrimesPerDate = {}
+for i in datesList:
+    try:
+        numCrimesPerDate[str(i)[:-9]] += 1
+    except KeyError:
+        numCrimesPerDate[str(i)[:-9]] = 1
+
+print(numCrimesPerDate)
+
+
+datesDFDict = {}
+datesDFDict["DATE"] = numCrimesPerDate.keys()
+datesDFDict["Num Crimes"] = [numCrimesPerDate[i] for i in numCrimesPerDate.keys()]
+
+datesDF = pandas.DataFrame(datesDFDict)
+
+print(datesDF)
+
+
+
