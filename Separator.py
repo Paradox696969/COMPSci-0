@@ -1,4 +1,5 @@
 import pandas
+import matplotlib.pyplot as plt
 
 pandas.set_option('display.max_columns', None)
 df = pandas.read_csv("Crime_data.csv")
@@ -24,8 +25,6 @@ df.drop([
         ], 
         axis=1, inplace=True)
 
-
-
 ### Date stuff
 df["DATE OCC"] = pandas.to_datetime(df["DATE OCC"])
 
@@ -41,12 +40,17 @@ print(numCrimesPerDate)
 
 
 datesDFDict = {}
-datesDFDict["DATE"] = numCrimesPerDate.keys()
+datesDFDict["DATE"] = sorted(numCrimesPerDate.keys())
 datesDFDict["Num Crimes"] = [numCrimesPerDate[i] for i in numCrimesPerDate.keys()]
 
 datesDF = pandas.DataFrame(datesDFDict)
+datesDF["DATE"] = datesDF["DATE"].astype("datetime64")
+datesDF = datesDF.set_index("DATE")
 
-print(datesDF)
+plt.plot(datesDF["Num Crimes"], marker="o")
+plt.xlabel("DATE")
+plt.ylabel("Number of Crimes")
+plt.show()
 
 
 
