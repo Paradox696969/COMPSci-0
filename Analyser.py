@@ -57,6 +57,7 @@ def plotLineGraph(df, y, xlabel, ylabel):
     plt.plot(df[y], marker="o")
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
+    plt.xticks(rotation='vertical', fontsize = 8)
     plt.show()
 
 #plots a bar graph
@@ -64,6 +65,7 @@ def plotBarGraph(df, x, y, xlabel, ylabel):
     plt.bar(df[x], df[y])
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
+    plt.xticks(rotation='vertical', fontsize = 4)
     plt.show()
 
 
@@ -74,7 +76,7 @@ if __name__ == "__main__":
     ## Example
 
     # preprocesses dataset
-    mainDF = separate("Crime_data.csv")
+    mainDF = separate("./Crime_data.csv")
 
     # converts DATE_OCC to a datetime object
     mainDF["DATE OCC"] = pandas.to_datetime(mainDF["DATE OCC"])
