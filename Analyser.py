@@ -68,6 +68,18 @@ def plotBarGraph(df, x, y, xlabel, ylabel):
     plt.xticks(rotation='vertical', fontsize = 4)
     plt.show()
 
+def mean(inplist):
+    return sum(inplist) // len(inplist)
+
+def mode(inplist):
+    modeDict = {}
+    for i in inplist:
+        try:
+            modeDict[str(i)] += 1
+        except KeyError:
+            modeDict[str(i)] = 1
+    
+    return max(modeDict, key=modeDict.get)
 
 # only runs the example if entire file is run
 # doesnt run the example if entire file is imported into one of the graphing files
