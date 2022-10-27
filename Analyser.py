@@ -81,6 +81,16 @@ def mode(inplist):
     
     return max(modeDict, key=modeDict.get)
 
+def median(inplist):
+    n = len(inplist)
+    index = n // 2
+    if n % 2:
+        return sorted(inplist)[index]
+    return sum(sorted(inplist)[index - 1:index + 1]) / 2
+
+def rangeStat(inplist):
+    return (min(inplist), max(inplist))
+
 # only runs the example if entire file is run
 # doesnt run the example if entire file is imported into one of the graphing files
 if __name__ == "__main__":
@@ -88,7 +98,7 @@ if __name__ == "__main__":
     ## Example
 
     # preprocesses dataset
-    mainDF = separate("./Crime_data.csv")
+    mainDF = separate("./Assets/Crime_data.csv")
 
     # converts DATE_OCC to a datetime object
     mainDF["DATE OCC"] = pandas.to_datetime(mainDF["DATE OCC"])
